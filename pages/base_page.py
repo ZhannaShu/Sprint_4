@@ -13,6 +13,5 @@ class BasePage:
         return self.driver.get(self.base_url)
 
     def find_element(self, locator, time=10):
-        return WebDriverWait(self.driver, time).until(EC.presence_of_element_located(locator),
-                                                      message=f'Not find {locator}')
+        return WebDriverWait(self.driver, time).until(EC.presence_of_element_located(locator), message=f'Not find {locator}')
 

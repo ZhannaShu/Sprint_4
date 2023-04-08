@@ -22,4 +22,3 @@ class ScooterMainPage(BasePage):
 
 
 
-        #element_Questions_about_important = [By.CLASS_NAME]
