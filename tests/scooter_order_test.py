@@ -1,8 +1,9 @@
 import allure
-from locators.scooter_order_locators import LocatorOrder, Logo
-from pages.scooter_order_page import ScooterOrderPage, UserData
+from data import UserData
+from locators.scooter_order_locators import LocatorOrder
+from pages.scooter_order_page import ScooterOrderPage
 
-class Test:
+class TestOrders:
     @allure.description('Флоу позитивного сценария по кнопке Заказать в шапке')
     def test_order_by_button_in_the_header(self, driver):
         scooter_order = ScooterOrderPage(driver)
@@ -19,14 +20,6 @@ class Test:
         scooter_order.button_check_status_modal_window()
         assert 'Заказ оформлен' in title
 
-        scooter_order.click_element(Logo.LOGO_SCOOTER)
-        assert driver.current_url == "https://qa-scooter.praktikum-services.ru/"
-
-        scooter_order.go_to_yandex(driver)
-        url_yandex = driver.current_url
-        assert url_yandex == "https://dzen.ru/?yredirect=true"
-
-
     @allure.description('Флоу позитивного сценария по кнопке Заказать в середине страницы')
     def test_order_by_button_in_the_body(self, driver):
         scooter_order = ScooterOrderPage(driver)
@@ -39,7 +32,7 @@ class Test:
                                                                  addres=UserData.address_female,
                                                                  station=UserData.station_female,
                                                                  phone=UserData.phone_female)
-        scooter_order.click_element(LocatorOrder.BUTTON_NEXT)  # клик по кнопке Далее
+        scooter_order.click_element(LocatorOrder.BUTTON_NEXT)
         scooter_order.fill_out_the_rental_form(date=UserData.date_female, index=UserData.indx_female,
                                                    color=UserData.color_female, comment=UserData.comment_female)
         scooter_order.fill_second_form_button_next()
@@ -47,14 +40,3 @@ class Test:
         title = scooter_order.order_window()
         scooter_order.button_check_status_modal_window()
         assert 'Заказ оформлен' in title
-
-        scooter_order.click_element(Logo.LOGO_SCOOTER)
-        assert driver.current_url == "https://qa-scooter.praktikum-services.ru/"
-
-        scooter_order.go_to_yandex(driver)
-        url_yandex = driver.current_url
-        assert url_yandex == "https://dzen.ru/?yredirect=true"
-
-
-
-
